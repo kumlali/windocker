@@ -27,7 +27,7 @@ export NO_PROXY=*.mycompany.com
 - Run Docker Quickstart Terminal and make sure it works properly.
 
 ## Installation of windocker
-- Copy `windocker` directory under to `C:\Users\<USER>`
+- Copy [windocker](windocker) directory under to `C:\Users\<USER>`
 - Copy PEM encoded self signed CA certificate files of proxy and private Docker registry to `C:\Users\<USER>\windocker\certs`. Make sure certificates are self signed AND have `pem` extension. You can check it by changing file extension to `crt` and open it in Windows. Under `General` tab you should see the same description in `Issued to` and `Issued by` fields.
 - Enter your `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` to `conf.cmd`. Detailed explanation is found in `conf.cmd`.
 - Run `init_host.cmd`. This script initializes Docker daemon running in Boot2Docker VM. Because configuration is persisted, you can safely reboot VM when you need. If you delete `default` VM and create new one, then you need to run the script again. 
@@ -41,7 +41,7 @@ export NO_PROXY=*.mycompany.com
 
 # Notes
 - When you reboot Boot2Docker VM (`docker-machine restart default`), its IP might change. Then you need to run `windocker.cmd` again. It adds new IP to `NO_PROXY` so that Docker client can connect to Docker daemon running in Boot2Docker VM.
-- Make sure you use self signed CA certificates. If you followed instructions under [Docker Trusted Registry - Security configuration] (https://docs.docker.com/docker-trusted-registry/configure/config-security), you probably ended up an openssl command like `openssl s_client ...`. In my case, that command created a file containing all the certificates of the chain. But, in my tests, it was required the file had only CA's root's certificate. If your proxy intercepts SSL traffic and inserts its own certificate, you can simply export proxy's CA certificate.
+- Make sure you use self signed CA certificates. If you followed instructions under [Docker Trusted Registry - Security configuration] (https://docs.docker.com/docker-trusted-registry/configure/config-security), you probably ended up an openssl command like `openssl s_client ...`. In my case, that command created a file containing all the certificates of the chain. But, in my tests, it was required the file had only CA's root's certificate. If your proxy intercepts SSL traffic and inserts its own certificate, you can simply export proxy's CA certificate. Please have a look at [Acquiring Proxy Server's CA Certificate](docs/README.md).
 
 # References
 - [How to install Docker on Windows behind a proxy](http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy)
