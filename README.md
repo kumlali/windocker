@@ -7,8 +7,8 @@ then you might probably need this tool to help resolve problems of Docker Toolbo
 
 windocker helps you:
 * use Docker commands from whithin Windows Command Prompt (instead of MINGW64 shell)
-* use Docker Hub
-* use your private Docker registry
+* access Docker Hub
+* access your private Docker registry
 
 # Installation
 ## Installation and Preparation of Docker Toolbox
@@ -28,7 +28,9 @@ export NO_PROXY=*.mycompany.com
 
 ## Installation of windocker
 - Copy [windocker](windocker) directory under to `C:\Users\<USER>`
-- Copy PEM encoded self signed CA certificate files of proxy and private Docker registry to `C:\Users\<USER>\windocker\certs`. Make sure certificates are self signed AND have `pem` extension. You can check it by changing file extension to `crt` and open it in Windows. Under `General` tab you should see the same description in `Issued to` and `Issued by` fields.
+- Obtain PEM encoded self signed CA certificate files of your corporate proxy and private Docker registry. Please have a look at [Obtaining Proxy Server's CA Certificate](docs/README.md). 
+- Make sure certificates are self signed AND have `pem` extension. You can check it by changing file extension to `crt` and open it in Windows. Under `General` tab you should see the same description in `Issued to` and `Issued by` fields.
+- Copy certificate files to `C:\Users\<USER>\windocker\certs`.
 - Enter your `HTTP_PROXY`, `HTTPS_PROXY` and `NO_PROXY` to `conf.cmd`. Detailed explanation is found in `conf.cmd`.
 - Run `init_host.cmd`. This script initializes Docker daemon running in Boot2Docker VM. Because configuration is persisted, you can safely reboot VM when you need. If you delete `default` VM and create new one, then you need to run the script again. 
 - Run `windocker.cmd`. In command prompt try `docker run hello-world`
@@ -41,7 +43,7 @@ export NO_PROXY=*.mycompany.com
 
 # Notes
 - When you reboot Boot2Docker VM (`docker-machine restart default`), its IP might change. Then you need to run `windocker.cmd` again. It adds new IP to `NO_PROXY` so that Docker client can connect to Docker daemon running in Boot2Docker VM.
-- Make sure you use self signed CA certificates. If you followed instructions under [Docker Trusted Registry - Security configuration] (https://docs.docker.com/docker-trusted-registry/configure/config-security), you probably ended up an openssl command like `openssl s_client ...`. In my case, that command created a file containing all the certificates of the chain. But, in my tests, it was required the file had only CA's root's certificate. If your proxy intercepts SSL traffic and inserts its own certificate, you can simply export proxy's CA certificate. Please have a look at [Acquiring Proxy Server's CA Certificate](docs/README.md).
+- Make sure you use self signed CA certificates. If you followed instructions under [Docker Trusted Registry - Security configuration] (https://docs.docker.com/docker-trusted-registry/configure/config-security), you probably ended up an openssl command like `openssl s_client ...`. In my case, that command created a file containing all the certificates of the chain. But, in my tests, it was required the file had only CA's root's certificate. If your proxy intercepts SSL traffic and inserts its own certificate, you can simply export proxy's CA certificate. Please have a look at [Obtaining Proxy Server's CA Certificate](docs/README.md).
 
 # References
 - [How to install Docker on Windows behind a proxy](http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy)
