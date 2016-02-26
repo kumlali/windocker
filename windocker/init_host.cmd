@@ -14,3 +14,4 @@ echo Configuration file(conf.cmd) has been loaded.
 set WINDOCKER_HOME=/c/Users/%USERNAME%/windocker
 
 docker-machine ssh default "export WINDOCKER_HOME=%WINDOCKER_HOME%;export HTTP_PROXY=%HTTP_PROXY%;export HTTPS_PROXY=%HTTPS_PROXY%;export NO_PROXY=%NO_PROXY%;%WINDOCKER_HOME%/init_host.sh"
+docker-machine restart default
