@@ -15,7 +15,7 @@ windocker helps you:
 - Install Docker Toolbox: https://docs.docker.com/engine/installation/windows
 - Make sure your proxy server and corporate firewall let you access to Docker Hub(https://index.docker.io) and https://api.github.com/repos/boot2docker/boot2docker/releases/latest. If your internet browser uses your company's proxy, you can test it by calling the mentioned URLs on your browser.
 - Find your corporate's HTTP and HTTPS proxy IP and port (e.g. 10.10.10.240:8080). HTTPS proxy URL is generally same as HTTP proxy. Make sure you have access to them (e.g. `telnet 10.10.10.240 8080`).
-- Add following lines at the top of `C:\Program Files\Docker Toolbox\start.sh` after `#!/bin/bash`.Docker Quickstart Terminal does not work because Boot2Docker image is not downloaded, otherwise.
+- Add following lines at the top of `C:\Program Files\Docker Toolbox\start.sh` after `#!/bin/bash`. Otherwise, if Boot2Docker image distributed by Docker Toolbox is out-of-date, Docker Quickstart Terminal does not work because latest Boot2Docker image cannot be downloaded.
 ```bash
 # --- windocker ---
 # Change with your own values!
@@ -37,9 +37,11 @@ export NO_PROXY=*.mycompany.com
 - You can run more than one `windocker.cmd` in parallel.
 
 # Tested Environments
-| Windows | Docker Toolbox |
-| --- | --- |
-| Windows 7 - 64bit | DockerToolbox-1.9.1i.exe |
+| Windows | Docker Toolbox | Boot2Docker |
+| --- | --- | --- |
+| Windows 7 - 64bit | DockerToolbox 1.9.1i | (?) |
+| Windows 7 - 64bit | DockerToolbox 1.10.1a | v1.10.2 (not bundled with 1.10.1a. It is downloaded when Docker Quickstart Terminal is run for the first time.) |
+
 
 # Notes
 - When you reboot Boot2Docker VM (`docker-machine restart default`), its IP might change. Then you need to run `windocker.cmd` again. It adds new IP to `NO_PROXY` so that Docker client can connect to Docker daemon running in Boot2Docker VM.
