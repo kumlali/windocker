@@ -21,7 +21,7 @@ windocker helps you:
 # Change with your own values!
 export HTTP_PROXY=http://10.10.10.240:8080
 export HTTPS_PROXY=http://10.10.10.240:8080
-export NO_PROXY=*.mycompany.com
+export NO_PROXY=.mycompany.com
 # --- windocker ---
 ```
 - Run Docker Quickstart Terminal and make sure it works properly.
