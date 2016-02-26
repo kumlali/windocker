@@ -54,6 +54,5 @@ printEnv
 addProxyConfToB2DProfile
 copyCertificatesFromWindowsToB2D
 convertWindowsEOLtoUnixEOLofCertificates
-restartDockerDaemon
 
 echo init_host.sh has been executed.
