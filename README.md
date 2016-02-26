@@ -47,4 +47,4 @@ export NO_PROXY=*.mycompany.com
 
 # References
 - [How to install Docker on Windows behind a proxy](http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy)
-- 'VirtualBox Guest Additions' and 'Installing secure Registry' parts of [SvenDowideit/boot2docker](https://github.com/SvenDowideit/boot2docker/blob/4942238743be6a4c6cb930353c7f09dc01006cfa/README.md)
+- 'VirtualBox Guest Additions' and 'Installing secure Registry' parts of [SvenDowideit/boot2docker](https://github.com/SvenDowideit/boot2docker)
