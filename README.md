@@ -46,6 +46,8 @@ export NO_PROXY=.mycompany.com
 # Notes
 - When you reboot Boot2Docker VM (`docker-machine restart default`), its IP might change. Then you need to run `windocker.cmd` again. It adds new IP to `NO_PROXY` so that Docker client can connect to Docker daemon running in Boot2Docker VM.
 - Make sure you use self signed CA certificates. If you followed instructions under [Docker Trusted Registry - Security configuration] (https://docs.docker.com/docker-trusted-registry/configure/config-security), you probably ended up an openssl command like `openssl s_client ...`. In my case, that command created a file containing all the certificates of the chain. But, in my tests, it was required the file had only CA's root's certificate. If your proxy intercepts SSL traffic and inserts its own certificate, you can simply export proxy's CA certificate. Please have a look at [Obtaining Proxy Server's CA Certificate](docs/README.md).
+- `NO_PROXY` value is important. In my case `*.mycompany.com` does not work. `.mycompany.com` and `docker-registry.mycompany.com` works.
+- Windows line ending characters(CR+LF) of PEM encoded certificates automatically converted to Unix's (LF) by windocker. But if you make changes on windocker scripts, then make sure *.sh scripts do not have CR+LF line endings.
 
 # References
 - [How to install Docker on Windows behind a proxy](http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy)
