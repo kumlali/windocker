@@ -9,8 +9,8 @@ BOOT2DOCKER_HOME=/var/lib/boot2docker
 
 convertWindowsEOLtoUnixEOL () {
   file=$1
-  tr -d '\r' < $file > $file.tmp
-  mv -f $file.tmp $file
+  sudo sh -c "tr -d '\r' < $file > $file.tmp"
+  sudo mv -f $file.tmp $file
 }
 
 
