@@ -6,6 +6,9 @@
 
 BOOT2DOCKER_HOME=/var/lib/boot2docker
 
+log () {
+  echo "[windocker] $1"
+}
 
 convertWindowsEOLtoUnixEOL () {
   file=$1
@@ -15,10 +18,10 @@ convertWindowsEOLtoUnixEOL () {
 
 
 printEnv () {
-  echo WINDOCKER_HOME: ${WINDOCKER_HOME}
-  echo HTTP_PROXY    : ${HTTP_PROXY}
-  echo HTTPS_PROXY   : ${HTTPS_PROXY}
-  echo NO_PROXY      : ${NO_PROXY}
+  log "WINDOCKER_HOME: ${WINDOCKER_HOME}"
+  log "HTTP_PROXY    : ${HTTP_PROXY}"
+  log "HTTPS_PROXY   : ${HTTPS_PROXY}"
+  log "NO_PROXY      : ${NO_PROXY}"
 }
 
 
@@ -27,12 +30,13 @@ addProxyConfToB2DProfile () {
   sudo sh -c "echo export HTTP_PROXY=${HTTP_PROXY}>> $BOOT2DOCKER_HOME/profile"
   sudo sh -c "echo export HTTPS_PROXY=${HTTPS_PROXY}>> $BOOT2DOCKER_HOME/profile"
   sudo sh -c "echo export NO_PROXY=${NO_PROXY}>> $BOOT2DOCKER_HOME/profile"
-  echo Proxy configuration has been added to the $BOOT2DOCKER_HOME/profile.
+  log "Proxy configuration has been added to the $BOOT2DOCKER_HOME/profile."
 } 
 
 
 copyCertificatesFromWindowsToB2D () {
   sudo cp -r $WINDOCKER_HOME/certs $BOOT2DOCKER_HOME
+  log "Certificate files have been copied from Windows to Boot2Docker."
 }
 
 
@@ -46,13 +50,38 @@ convertWindowsEOLtoUnixEOLofCertificates () {
 
 restartDockerDaemon () {  
   sudo /etc/init.d/docker restart
-  echo Docker daemon has been restarted.
+  log "Docker daemon has been restarted."
 }
 
 
-printEnv
-addProxyConfToB2DProfile
-copyCertificatesFromWindowsToB2D
-convertWindowsEOLtoUnixEOLofCertificates
+showWindockerChanges () {
+  log "------------------------------------------ "
+  log "Certificates"
+  log "------------------------------------------ "
+  ls -all $BOOT2DOCKER_HOME/certs
 
-echo init_host.sh has been executed.
+  log "------------------------------------------ "
+  log "$BOOT2DOCKER_HOME/profile"
+  log "------------------------------------------ "
+  cat $BOOT2DOCKER_HOME/profile
+} 
+
+
+
+# ----------------------------------------------------------------------
+
+COMMAND=${1}
+
+if [[ "$COMMAND" = "showWindockerChanges" ]] ; then
+  showWindockerChanges
+else
+  #Was environment variables really passed from Windows to Boot2Docker VM?
+  #printEnv
+  
+  addProxyConfToB2DProfile
+  copyCertificatesFromWindowsToB2D
+  convertWindowsEOLtoUnixEOLofCertificates
+
+  log "Initialization of Boot2Docker VM has been completed: "
+  showWindockerChanges
+fi
