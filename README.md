@@ -40,8 +40,9 @@ export NO_PROXY=.mycompany.com
 # Tested Environments
 | Windows | Docker Toolbox | Boot2Docker |
 | --- | --- | --- |
-| Windows 7 - 64bit | DockerToolbox 1.9.1i | (?) |
-| Windows 7 - 64bit | DockerToolbox 1.10.1a | v1.10.2 (not bundled with 1.10.1a. It is downloaded when Docker Quickstart Terminal is run for the first time.) |
+| Windows 7 - 64bit | 1.9.1i | v1.10.2  |
+| Windows 7 - 64bit | 1.10.1a | v1.10.2  |
+| Windows 7 - 64bit | 1.10.2 | v1.10.2 |
 
 
 # Notes
